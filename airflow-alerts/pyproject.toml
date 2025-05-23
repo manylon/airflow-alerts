@@ -1,0 +1,32 @@
+[project]
+name = "airflow-alerts"
+version = "0.0.1"
+description = "Reusable alerts for Apache Airflow that send notifications to different channels."
+dependencies = [
+    "apache-airflow>=3.0.0",
+    "redis",
+    "requests"
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-mock",
+    "black",
+    "mypy",
+    "isort",
+    "build",
+    "pre-commit"
+]
+
+[build-system]
+requires = ["setuptools>=80.6.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
