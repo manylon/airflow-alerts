@@ -1,0 +1,14 @@
+name: airflow-alerts
+
+services:
+  airflow-alerts:
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile
+    container_name: airflow-alerts
+    volumes:
+      - ../:/app
+    stdin_open: true
+    tty: true
+    ports:
+      - "5433:5432"
