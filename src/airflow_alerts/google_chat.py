@@ -60,7 +60,7 @@ def _send_message(dag_id, run_id, connection_id, message_body):
 
 
 def basic_alert(
-    connection_id: str, message_body: str, redis_conn_id: str = None, delay: dt_time = None
+    connection_id: str, message_body: dict, redis_conn_id: str = None, delay: dt_time = None
 ):
     """
     Sends a basic alert to Google Chat.
