@@ -21,7 +21,6 @@ temp/
 logs/
 *.log
 
-.vscode/
 *.pyc
 *.pyo
 **/*.egg-info/
