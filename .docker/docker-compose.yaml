@@ -10,5 +10,5 @@ services:
       - ../:/app
     stdin_open: true
     tty: true
-    ports:
-      - "5433:5432"
+    env_file:
+      - .env
