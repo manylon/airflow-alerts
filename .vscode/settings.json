@@ -1,0 +1,40 @@
+{
+  "python.envFile": "${workspaceFolder}/.vscode/paths.env",
+  "python.analysis.autoFormatStrings":true,
+	// Arguments passed in. Each argument is a separate string in the array.
+	"flake8.args": ["--max-line-length=200"],
+
+	// The current working directory used to run `flake8`. To use the directory of the file currently being linted, you can use `${fileDirname}`.
+	"flake8.cwd": "${workspaceFolder}",
+
+	// Patterns used to exclude files or folders from being linted.
+	"flake8.ignorePatterns": [],
+
+	// When set to a path to python executable, extension will use that to launch the server and any subprocess.
+	"flake8.interpreter": [],
+
+	// When set to a path to `flake8` binary, extension will use that for linting. NOTE: Using this option may slowdown linting.
+	"flake8.path": [],
+
+	// Mapping from severity of `flake8` message type to severity shown in problem window.
+	"flake8.severity": {
+		"E": "Error",
+		"F": "Error",
+		"I": "Information",
+		"W": "Warning"
+	},
+  "python.analysis.autoImportCompletions": false,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true,
+  },
+  "workbench.colorCustomizations": {
+	"titleBar.activeBackground": "#d6ba2da1",
+},
+"python.analysis.typeCheckingMode": "off",
+"python.testing.pytestArgs": [
+	"airflow-alerts/tests"
+],
+"python.testing.unittestEnabled": false,
+"python.testing.pytestEnabled": true,
+}
