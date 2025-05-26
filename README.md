@@ -30,7 +30,7 @@ pip install git+https://github.com/manylon/airflow-alerts.git
 ```python
 from airflow_alerts.google_chat import task_success_alert
 
-# In your DAG definition
+# In your Taks definition
 on_success_callback = task_success_alert("my_gchat_conn")
 ```
 
