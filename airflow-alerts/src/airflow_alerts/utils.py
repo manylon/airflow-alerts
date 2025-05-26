@@ -41,6 +41,8 @@ def _send_post_request(message_body, full_url):
     Args:
         message_body (dict): The message body to send.
         full_url (str): The URL to send the request to.
+    Returns:
+        int: The HTTP status code of the response.
     """
     r = requests.post(
         url=full_url,
@@ -52,6 +54,7 @@ def _send_post_request(message_body, full_url):
         print("Failed to send message.")
     else:
         print("Message sent successfully!")
+    return r.status_code
 
 
 def _build_task_log_url(task_instance) -> str:

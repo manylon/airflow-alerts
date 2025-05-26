@@ -56,7 +56,7 @@ def _send_message(dag_id, run_id, connection_id, message_body):
         print(f"Invalid URL: {full_url}")
         return
     print("Sending message to Google Chat")
-    _send_post_request(message_body, full_url)
+    return _send_post_request(message_body, full_url)
 
 
 def basic_alert(
@@ -95,12 +95,12 @@ def basic_alert(
             )
             print(f"Alert scheduled for {target.strftime('%Y-%m-%d %H:%M:%S')}")
         else:
-            _send_message(dag_id, run_id, connection_id, message_body)
+            return _send_message(dag_id, run_id, connection_id, message_body)
 
     return basic_alert_inner
 
 
-def task_success_alert(connection_id: str):
+def task_success_alert(connection_id: str, redis_conn_id: str = None, delay: dt_time = None):
     """
     Sends a task success alert to Google Chat.
     Args:
@@ -185,17 +185,17 @@ def task_success_alert(connection_id: str):
                 }
             ]
         }
-        _send_message(
-            dag_id=task_instance.dag_id,
-            run_id=task_instance.run_id,
-            message_body=message_body,
+        return basic_alert(
             connection_id=connection_id,
-        )
+            message_body=message_body,
+            redis_conn_id=redis_conn_id,
+            delay=delay
+        )(context)
 
     return task_success_alert_inner
 
 
-def task_failure_alert(connection_id: str):
+def task_failure_alert(connection_id: str, redis_conn_id: str = None, delay: dt_time = None):
     """
     Sends a task failure alert to Google Chat.
     Args:
@@ -280,12 +280,11 @@ def task_failure_alert(connection_id: str):
                 }
             ]
         }
-
-        _send_message(
-            dag_id=task_instance.dag_id,
-            run_id=task_instance.run_id,
-            message_body=message_body,
+        return basic_alert(
             connection_id=connection_id,
-        )
+            message_body=message_body,
+            redis_conn_id=redis_conn_id,
+            delay=delay
+        )(context)
 
     return task_failure_alert_inner
