@@ -60,7 +60,7 @@ def _send_message(dag_id, run_id, connection_id, message_body):
 
 
 def basic_alert(
-    connection_id: str, message_body: str, redis_conn_id: str, delay: dt_time = None
+    connection_id: str, message_body: str, redis_conn_id: str = None, delay: dt_time = None
 ):
     """
     Sends a basic alert to Google Chat.
@@ -68,13 +68,13 @@ def basic_alert(
     Args:
         connection_id (str): The connection ID.
         message_body (str): The message body.
-        redis_conn_id (str): The Redis connection ID.
+        redis_conn_id (str): The Redis connection ID. If None, the alert is sent immediately.
         delay (dt_time): The time to delay the alert. If None, the alert is sent immediately.
     """
 
     def basic_alert_inner(context):
         dag_id, run_id = _get_dag_run_identifiers(context)
-        if delay is not None:
+        if delay and redis_conn_id:
             redis_conn = _get_redis_client(redis_conn_id)
             now = datetime.now()
             target = now.replace(
